@@ -1,4 +1,4 @@
-﻿using Application.Services.AuthenticatorService;
+using Application.Services.AuthenticatorService;
 using Application.Services.AuthService;
 using Application.Services.UsersService;
 using Core.Application.Pipelines.Authorization;
