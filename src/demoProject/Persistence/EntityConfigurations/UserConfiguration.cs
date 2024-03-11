@@ -38,7 +38,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         List<User> users = new();
 
         HashingHelper.CreatePasswordHash(
-            password: "Passw0rd",
+            password: "sifre",
             passwordHash: out byte[] passwordHash,
             passwordSalt: out byte[] passwordSalt
         );
@@ -48,7 +48,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 Id = 1,
                 FirstName = "Admin",
                 LastName = "NArchitecture",
-                Email = "admin@admin.com",
+                Email = "x@x.com",
                 Status = true,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt

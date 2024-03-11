@@ -25,6 +25,7 @@ public class Product : Entity<int>
     public virtual ICollection<ProductCategory>? ProductCategories { get; set; }
     public virtual ICollection<ProductReview>? ProductReviews { get; set; }
     public virtual ICollection<ProductQuestion>? ProductQuestions { get; set; }
+    public virtual ICollection<ProductVariant>? ProductVariants { get; set; }
     public virtual ICollection<ShopProduct>? ShopProducts { get; set; }
     public virtual ICollection<ProductFeature>? ProductFeatures { get; set; }
 }
