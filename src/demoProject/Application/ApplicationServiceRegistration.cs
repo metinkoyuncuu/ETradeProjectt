@@ -61,6 +61,7 @@ using Application.Services.Sizes;
 using Application.Services.SubCategories;
 using Application.Services.Tags;
 using Application.Services.TermConditions;
+using Application.Services.ContextOperations;
 
 namespace Application;
 
@@ -90,6 +91,8 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IAuthService, AuthManager>();
         services.AddScoped<IAuthenticatorService, AuthenticatorManager>();
         services.AddScoped<IUserService, UserManager>();
+
+        services.AddScoped<IContextOperationsService, ContextOperationsManager>();
 
         services.AddScoped<IBillsService, BillsManager>();
         services.AddScoped<IBrandsService, BrandsManager>();

@@ -89,4 +89,5 @@ public class AuthBusinessRules : BaseBusinessRules
         if (!HashingHelper.VerifyPasswordHash(password, user!.PasswordHash, user.PasswordSalt))
             throw new BusinessException(AuthMessages.PasswordDontMatch);
     }
+   
 }
