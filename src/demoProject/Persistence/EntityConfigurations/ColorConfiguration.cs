@@ -18,5 +18,29 @@ public class ColorConfiguration : IEntityTypeConfiguration<Color>
         builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
+    }
+    private IEnumerable<Color> getSeeds()
+    {
+        List<Color> colors = new() {
+            new() { Id = 1, Name = "Red", IsVerified = true },
+            new() { Id = 2, Name = "Yellow", IsVerified = true },
+            new() { Id = 3, Name = "Blue", IsVerified = true },
+            new() { Id = 4, Name = "Green", IsVerified = true },
+            new() { Id = 5, Name = "Orange", IsVerified = true },
+            new() { Id = 6, Name = "Purple", IsVerified = true },
+            new() { Id = 7, Name = "Pink", IsVerified = true },
+            new() { Id = 8, Name = "Cyan", IsVerified = true },
+            new() { Id = 9, Name = "Magenta", IsVerified = true },
+            new() { Id = 10, Name = "Brown", IsVerified = true },
+            new() { Id = 11, Name = "White", IsVerified = true },
+            new() { Id = 12, Name = "Black", IsVerified = true },
+            new() { Id = 13, Name = "Gray", IsVerified = true },
+            new() { Id = 14, Name = "Beige", IsVerified = true },
+            new() { Id = 15, Name = "Turquoise", IsVerified = true }
+        };
+
+
+        return colors.ToArray();
     }
 }

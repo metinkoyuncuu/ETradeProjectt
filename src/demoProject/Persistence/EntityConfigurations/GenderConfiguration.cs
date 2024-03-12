@@ -1,3 +1,5 @@
+using Core.Security.Entities;
+using Core.Security.Hashing;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -17,5 +19,12 @@ public class GenderConfiguration : IEntityTypeConfiguration<Gender>
         builder.Property(g => g.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(g => !g.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
+    }
+    private IEnumerable<Gender> getSeeds()
+    {
+        List<Gender> genders = new() { new() {Id=1, Name = "Man" }, new() {Id=2,Name="Woman"} };
+         
+        return genders.ToArray();
     }
 }

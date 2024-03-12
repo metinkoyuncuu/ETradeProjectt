@@ -30,10 +30,13 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         HashSet<OperationClaim> seeds =
             new()
             {
-                new OperationClaim { Id = ++id, Name = GeneralOperationClaims.Admin }
+                new OperationClaim { Id = ++id, Name = GeneralOperationClaims.Admin },
+                new OperationClaim { Id = ++id,Name= GeneralOperationClaims.Seller },
+                new OperationClaim{Id=++id,Name=GeneralOperationClaims.Customer }
             };
 
-        
+        //seeds.Add(new() { Id=++id,Name=GeneralOperationClaims.Seller);
+        //seeds.Add(new() { Id=++id,Name=GeneralOperationClaims.Customer});
         #region Brands
         
         seeds.Add(new OperationClaim { Id = ++id, Name = "Brands.Admin" });

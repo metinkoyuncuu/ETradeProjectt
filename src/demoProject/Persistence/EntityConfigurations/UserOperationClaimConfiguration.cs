@@ -27,10 +27,17 @@ public class UserOperationClaimConfiguration : IEntityTypeConfiguration<UserOper
 
     private IEnumerable<UserOperationClaim> getSeeds()
     {
-        List<UserOperationClaim> userOperationClaims = new();
 
         UserOperationClaim adminUserOperationClaim = new(id: 1, userId: 1, operationClaimId: 1);
-        userOperationClaims.Add(adminUserOperationClaim);
+
+        UserOperationClaim sellerUserOperationClaim = new(id: 2, userId: 2, operationClaimId: 2);
+
+        UserOperationClaim sellerCustomerUserOperationClaim = new(id: 3, userId: 2, operationClaimId: 3);
+
+        UserOperationClaim customerUserOperationClaim = new(id: 4, userId: 3, operationClaimId: 3);
+
+        List<UserOperationClaim> userOperationClaims = new() { adminUserOperationClaim, sellerUserOperationClaim,
+            sellerCustomerUserOperationClaim, customerUserOperationClaim};
 
         return userOperationClaims;
     }

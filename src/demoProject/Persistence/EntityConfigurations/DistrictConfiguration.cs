@@ -18,5 +18,14 @@ public class DistrictConfiguration : IEntityTypeConfiguration<District>
         builder.Property(d => d.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(d => !d.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
+    }
+    private IEnumerable<District> getSeeds()
+    {
+        List<District> districts = new() {
+            new() { Id = 1, Name = "DemoDistrictForCity1",CityId=1},
+            new() { Id = 2, Name = "DemoDistrictForCity2" ,CityId=2} };
+
+        return districts.ToArray();
     }
 }

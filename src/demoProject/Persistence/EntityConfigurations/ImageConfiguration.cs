@@ -17,5 +17,17 @@ public class ImageConfiguration : IEntityTypeConfiguration<Image>
         builder.Property(i => i.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(i => !i.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
+    }
+    private IEnumerable<Image> getSeeds()
+    {
+        List<Image> images = new() {
+                new() {
+                    Id = 1,
+                    Url="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
+                }
+            };
+
+        return images.ToArray();
     }
 }
