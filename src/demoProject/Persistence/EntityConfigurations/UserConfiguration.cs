@@ -47,7 +47,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             {
                 Id = 1,
                 FirstName = "Admin",
-                LastName = "NArchitecture",
+                LastName = "Pazarim",
                 Email = "x@x.com",
                 Status = true,
                 PasswordHash = passwordHash,
