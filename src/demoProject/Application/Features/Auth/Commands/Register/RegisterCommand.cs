@@ -1,4 +1,5 @@
 ﻿using Application.Features.Auth.Rules;
+using Application.Services.AuthenticatorService;
 using Application.Services.AuthService;
 using Application.Services.Repositories;
 using Core.Application.Dtos;
@@ -31,12 +32,14 @@ public class RegisterCommand : IRequest<RegisteredResponse>
         private readonly IUserRepository _userRepository;
         private readonly IAuthService _authService;
         private readonly AuthBusinessRules _authBusinessRules;
+        private readonly IAuthenticatorService _authenticatorService;
 
-        public RegisterCommandHandler(IUserRepository userRepository, IAuthService authService, AuthBusinessRules authBusinessRules)
+        public RegisterCommandHandler(IUserRepository userRepository, IAuthService authService, AuthBusinessRules authBusinessRules, IAuthenticatorService authenticatorService)
         {
             _userRepository = userRepository;
             _authService = authService;
             _authBusinessRules = authBusinessRules;
+            _authenticatorService = authenticatorService;
         }
 
         public async Task<RegisteredResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
@@ -59,6 +62,8 @@ public class RegisterCommand : IRequest<RegisteredResponse>
                     Status = true
                 };
             User createdUser = await _userRepository.AddAsync(newUser);
+
+            await _authenticatorService.SendAuthenticatorCode(newUser);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 
