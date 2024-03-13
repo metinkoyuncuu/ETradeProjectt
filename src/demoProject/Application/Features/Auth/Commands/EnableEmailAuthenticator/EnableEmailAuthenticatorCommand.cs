@@ -64,15 +64,14 @@ public class EnableEmailAuthenticatorCommand : IRequest
 
             var toEmailList = new List<MailboxAddress> { new(name: $"{user.FirstName} {user.LastName}", user.Email) };
 
-            _mailService.SendMail(
-                new Mail
-                {
-                    ToList = toEmailList,
-                    Subject = "Verify Your Email - NArchitecture",
-                    TextBody =
-                        $"Click on the link to verify your email: {request.VerifyEmailUrlPrefix}?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticator.ActivationKey)}"
-                }
-            );
+            Mail mail = new Mail(
+                toList: toEmailList,
+                subject: "Çift Yönlü Doğrulamayı Açın",
+                textBody: $"Linke tıkla ve çift yönlü doğrulamayı aç: {request.VerifyEmailUrlPrefix}?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticator.ActivationKey)}",
+                htmlBody: null
+                );
+
+            _mailService.SendMail(mail);
         }
     }
 }

@@ -55,6 +55,7 @@ public class LoginCommand : IRequest<LoggedResponse>
             );
             await _authBusinessRules.UserShouldBeExistsWhenSelected(user);
             await _authBusinessRules.UserPasswordShouldBeMatch(user!.Id, request.UserForLoginDto.Password);
+            await _authBusinessRules.AccountMustBeActivated(user);
 
             LoggedResponse loggedResponse = new();
 

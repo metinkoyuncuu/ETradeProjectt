@@ -89,4 +89,17 @@ public class AuthBusinessRules : BaseBusinessRules
         if (!HashingHelper.VerifyPasswordHash(password, user!.PasswordHash, user.PasswordSalt))
             throw new BusinessException(AuthMessages.PasswordDontMatch);
     }
+
+    public Task AccountMustBeActivated(User user)
+    {
+        if (user.Status is false)
+            throw new BusinessException(AuthMessages.AccountMustBeActivated);
+        return Task.CompletedTask;
+    }
+    public Task AccountAlreadyActivated(User user)
+    {
+        if (user.Status is true)
+            throw new BusinessException(AuthMessages.AccountAlreadyActivated);
+        return Task.CompletedTask;
+    }
 }

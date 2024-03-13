@@ -59,11 +59,9 @@ public class RegisterCommand : IRequest<RegisteredResponse>
                     LastName = request.UserForRegisterDto.LastName,
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
-                    Status = true
+                    Status = false
                 };
             User createdUser = await _userRepository.AddAsync(newUser);
-
-            await _authenticatorService.SendAuthenticatorCode(newUser);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 

@@ -90,14 +90,15 @@ public class AuthenticatorManager : IAuthenticatorService
 
         var toEmailList = new List<MailboxAddress> { new(name: $"{user.FirstName} {user.LastName}", user.Email) };
 
-        _mailService.SendMail(
-            new Mail
-            {
-                ToList = toEmailList,
-                Subject = "Authenticator Code - NArchitecture",
-                TextBody = $"Enter your authenticator code: {authenticatorCode}"
-            }
-        );
+        Mail mail = new Mail(
+          toList : toEmailList,
+         subject : "Authenticator Code - NArchitecture",
+         textBody : $"Enter your authenticator code: {authenticatorCode}",
+         htmlBody : null
+                );
+
+        _mailService.SendMail(mail);
+            
     }
 
     private async Task VerifyAuthenticatorCodeWithEmail(User user, string authenticatorCode)

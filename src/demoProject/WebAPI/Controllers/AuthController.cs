@@ -4,6 +4,7 @@ using Application.Features.Auth.Commands.Login;
 using Application.Features.Auth.Commands.RefreshToken;
 using Application.Features.Auth.Commands.Register;
 using Application.Features.Auth.Commands.RevokeToken;
+using Application.Features.Auth.Commands.VerifyAccount;
 using Application.Features.Auth.Commands.VerifyEmailAuthenticator;
 using Application.Features.Auth.Commands.VerifyOtpAuthenticator;
 using Core.Application.Dtos;
@@ -63,6 +64,13 @@ public class AuthController : BaseController
         RevokeTokenCommand revokeTokenCommand = new() { Token = refreshToken ?? getRefreshTokenFromCookies(), IpAddress = getIpAddress() };
         RevokedTokenResponse result = await Mediator.Send(revokeTokenCommand);
         return Ok(result);
+    }
+
+    [HttpPost("ActivateAccount")]
+    public async Task<IActionResult> ActivateAccount([FromBody] ActivateAccountCommand activateAccountCommand)
+    {
+        await Mediator.Send(activateAccountCommand);
+        return Ok();
     }
 
     [HttpGet("EnableEmailAuthenticator")]
