@@ -17,5 +17,14 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
         builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
+    }
+    private IEnumerable<City> getSeeds()
+    {
+        List<City> cities = new() {
+            new() { Id = 1, Name = "DemoCity1" },
+            new() { Id = 2, Name = "DemoCity2" } };
+
+        return cities.ToArray();
     }
 }

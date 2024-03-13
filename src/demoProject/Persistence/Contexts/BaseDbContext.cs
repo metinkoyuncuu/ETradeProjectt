@@ -61,7 +61,7 @@ public class BaseDbContext : DbContext
     public DbSet<SubCategory> SubCategories { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<TermCondition> TermConditions { get; set; }
-
+    public DbSet<Log> Logs { get; set; }
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
     {

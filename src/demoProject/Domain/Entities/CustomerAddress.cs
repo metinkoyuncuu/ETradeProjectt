@@ -12,7 +12,7 @@ public class CustomerAddress : Entity<int>
     public int CityId { get; set; }
     public int DistrictId { get; set; }
     public string Address { get; set; } = string.Empty;
-    public virtual City? Gender { get; set; }
+    public virtual City? City { get; set; }
     public virtual District? District { get; set; }
     public virtual Customer? Customer { get; set; }
 }

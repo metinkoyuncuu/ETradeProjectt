@@ -25,5 +25,25 @@ public class SellerConfiguration : IEntityTypeConfiguration<Seller>
         builder.Property(s => s.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(s => !s.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
+    }
+    private IEnumerable<Seller> getSeeds()
+    {
+        List<Seller> sellers = new() {
+        new() {
+            Id = 1,
+            UserId = 2,
+            PersonalAddress = "123 Main Street",
+            Country = "USA",
+            PhoneNumber = "+905555555555",
+            IdentityNumber = "11111111111",
+            ImageId = 1,
+            IsVerified = true,
+            BirthDate = new DateTime(2002, 5, 15),
+            GenderId = 1
+        }
+    };
+
+        return sellers.ToArray();
     }
 }

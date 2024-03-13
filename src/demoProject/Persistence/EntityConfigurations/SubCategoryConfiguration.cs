@@ -19,5 +19,18 @@ public class SubCategoryConfiguration : IEntityTypeConfiguration<SubCategory>
         builder.Property(sc => sc.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(sc => !sc.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
     }
+    private IEnumerable<SubCategory> getSeeds()
+    {
+        List<SubCategory> subCategories = new() {
+        new() { Id = 1, Name = "SubCategory1", CategoryId = 1, IsVerified = true },
+        new() { Id = 2, Name = "SubCategory2", CategoryId = 1, IsVerified = true },
+        new() { Id = 3, Name = "SubCategory3", CategoryId = 2, IsVerified = true },
+        new() { Id = 4, Name = "SubCategory4", CategoryId = 2, IsVerified = true}
+    };
+
+        return subCategories.ToArray();
+    }
+
 }

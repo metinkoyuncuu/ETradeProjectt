@@ -22,7 +22,10 @@ public class BillConfiguration : IEntityTypeConfiguration<Bill>
         builder.Property(b => b.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(b => b.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(b => b.DeletedDate).HasColumnName("DeletedDate");
-
+        builder.HasOne(ca => ca.District)
+            .WithMany()
+            .HasForeignKey(ca => ca.DistrictId)
+            .OnDelete(DeleteBehavior.Restrict);
         builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
     }
 }

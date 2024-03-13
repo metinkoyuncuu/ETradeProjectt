@@ -35,10 +35,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
     private IEnumerable<User> getSeeds()
     {
-        List<User> users = new();
 
         HashingHelper.CreatePasswordHash(
-            password: "sifre",
+            password: "adminpassw",
             passwordHash: out byte[] passwordHash,
             passwordSalt: out byte[] passwordSalt
         );
@@ -46,14 +45,50 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             new()
             {
                 Id = 1,
-                FirstName = "Admin",
-                LastName = "Pazarim",
-                Email = "x@x.com",
+                FirstName = "AdminFL",
+                LastName = "AdminLN",
+                Email = "admin@admin.com",
                 Status = true,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };
-        users.Add(adminUser);
+        
+        HashingHelper.CreatePasswordHash(
+            password: "sellerpassw",
+            passwordHash: out byte[] sellerPasswordHash,
+            passwordSalt: out byte[] sellerPasswordSalt
+        );
+        User sellerUser =
+            new()
+            {
+                Id = 2,
+                FirstName = "SellerFL",
+                LastName = "SellerLN",
+                Email = "seller@seller.com",
+                Status = true,
+                PasswordHash = sellerPasswordHash,
+                PasswordSalt = sellerPasswordSalt
+            };
+    
+
+        HashingHelper.CreatePasswordHash(
+            password: "customerpassw",
+            passwordHash: out byte[] customerPasswordHash,
+            passwordSalt: out byte[] customerPasswordSalt
+        );
+        User customerUser =
+            new()
+            {
+                Id = 3,
+                FirstName = "CustomerFL",
+                LastName = "CustomerLN",
+                Email = "customer@customer.com",
+                Status = true,
+                PasswordHash = customerPasswordHash,
+                PasswordSalt = customerPasswordSalt
+            };
+
+        List<User> users = new() { adminUser, sellerUser, customerUser };
 
         return users.ToArray();
     }

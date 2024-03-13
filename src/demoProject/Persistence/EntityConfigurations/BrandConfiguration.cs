@@ -18,5 +18,14 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
         builder.Property(b => b.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(b => !b.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
+    }
+    private IEnumerable<Brand> getSeeds()
+    {
+        List<Brand> brands = new() {
+            new() { Id = 1, Name = "DemoBrand1",IsVerified=true }, 
+            new() { Id = 2, Name = "DemoBrand2" ,IsVerified=true} };
+
+        return brands.ToArray();
     }
 }

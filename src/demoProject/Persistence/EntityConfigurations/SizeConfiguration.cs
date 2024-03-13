@@ -18,5 +18,20 @@ public class SizeConfiguration : IEntityTypeConfiguration<Size>
         builder.Property(s => s.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(s => !s.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
     }
+    private IEnumerable<Size> getSeeds()
+    {
+        List<Size> sizes = new() {
+            new() { Id = 1, Name = "XS", IsVerified = true, },
+            new() { Id = 2, Name = "S", IsVerified = true,},
+            new() { Id = 3, Name = "M", IsVerified = true},
+            new() { Id = 4, Name = "L", IsVerified = true},
+            new() { Id = 5, Name = "XL", IsVerified = true},
+            new() { Id = 6, Name = "XXL", IsVerified = true }
+    };
+
+        return sizes.ToArray();
+    }
+
 }

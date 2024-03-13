@@ -61,6 +61,7 @@ using Application.Services.Sizes;
 using Application.Services.SubCategories;
 using Application.Services.Tags;
 using Application.Services.TermConditions;
+using Application.Services.ContextOperations;
 
 namespace Application;
 
@@ -85,11 +86,13 @@ public static class ApplicationServiceRegistration
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddSingleton<IMailService, MailKitMailService>();
-        services.AddSingleton<LoggerServiceBase, FileLogger>();
+        services.AddSingleton<LoggerServiceBase, MsSqlLogger>();
         services.AddSingleton<IElasticSearch, ElasticSearchManager>();
         services.AddScoped<IAuthService, AuthManager>();
         services.AddScoped<IAuthenticatorService, AuthenticatorManager>();
         services.AddScoped<IUserService, UserManager>();
+
+        services.AddScoped<IContextOperationsService, ContextOperationsManager>();
 
         services.AddScoped<IBillsService, BillsManager>();
         services.AddScoped<IBrandsService, BrandsManager>();

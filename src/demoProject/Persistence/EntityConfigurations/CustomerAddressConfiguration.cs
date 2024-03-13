@@ -22,7 +22,15 @@ public class CustomerAddressConfiguration : IEntityTypeConfiguration<CustomerAdd
         builder.Property(ca => ca.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(ca => ca.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(ca => ca.DeletedDate).HasColumnName("DeletedDate");
+        builder.HasOne(ca => ca.City)
+            .WithMany() 
+            .HasForeignKey(ca => ca.CityId)
+            .OnDelete(DeleteBehavior.Restrict); 
 
+        builder.HasOne(ca => ca.District)
+            .WithMany() 
+            .HasForeignKey(ca => ca.DistrictId)
+            .OnDelete(DeleteBehavior.Restrict);
         builder.HasQueryFilter(ca => !ca.DeletedDate.HasValue);
     }
 }

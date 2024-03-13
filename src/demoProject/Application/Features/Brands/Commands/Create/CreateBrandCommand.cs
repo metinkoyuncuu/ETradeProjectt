@@ -9,6 +9,7 @@ using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Brands.Constants.BrandsOperationClaims;
+using Application.Features.OperationClaims.Constants;
 
 namespace Application.Features.Brands.Commands.Create;
 
@@ -17,7 +18,7 @@ public class CreateBrandCommand : IRequest<CreatedBrandResponse>, ISecuredReques
     public string Name { get; set; }
     public bool IsVerified { get; set; }
 
-    public string[] Roles => new[] { Admin, Write, BrandsOperationClaims.Create };
+    public string[] Roles => new[] { GeneralOperationClaims.Seller };
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

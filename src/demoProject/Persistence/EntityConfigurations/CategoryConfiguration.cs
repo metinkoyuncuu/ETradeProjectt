@@ -18,5 +18,14 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
         builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
+    }
+    private IEnumerable<Category> getSeeds()
+    {
+        List<Category> categories = new() {
+            new() { Id = 1, Name = "DemoCategory1",IsVerified=true },
+            new() { Id = 2, Name = "DemoCategory2" ,IsVerified=true} };
+
+        return categories.ToArray();
     }
 }

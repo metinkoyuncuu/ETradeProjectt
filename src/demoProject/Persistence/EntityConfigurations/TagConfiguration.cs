@@ -18,5 +18,17 @@ public class TagConfiguration : IEntityTypeConfiguration<Tag>
         builder.Property(t => t.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(t => !t.DeletedDate.HasValue);
+        builder.HasData(getSeeds());
+    }
+    private IEnumerable<Tag> getSeeds()
+    {
+        List<Tag> tags = new() {
+        new() { Id = 1, Name = "Tag1", IsVerified = true },
+        new() { Id = 2, Name = "Tag2", IsVerified = true },
+        new() { Id = 3, Name = "Tag3", IsVerified = true },
+        new() { Id = 4, Name = "Tag4", IsVerified = false}
+    };
+
+        return tags.ToArray();
     }
 }
