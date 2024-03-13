@@ -28,6 +28,7 @@ public class ContextOperationsManager : IContextOperationsService
     public async Task<Customer> GetCustomerFromContext() 
     {
         Customer? customer = await _customersService.GetAsync(predicate: s => s.UserId == _userId) ;
+
         return customer ?? throw new AuthorizationException("You are not a Customer. Redirect to Customer login page...");
     }
     public async Task<Seller> GetSellerFromContext() 

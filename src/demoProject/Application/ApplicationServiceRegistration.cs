@@ -86,7 +86,7 @@ public static class ApplicationServiceRegistration
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddSingleton<IMailService, MailKitMailService>();
-        services.AddSingleton<LoggerServiceBase, FileLogger>();
+        services.AddSingleton<LoggerServiceBase, MsSqlLogger>();
         services.AddSingleton<IElasticSearch, ElasticSearchManager>();
         services.AddScoped<IAuthService, AuthManager>();
         services.AddScoped<IAuthenticatorService, AuthenticatorManager>();

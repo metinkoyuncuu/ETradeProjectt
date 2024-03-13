@@ -22,7 +22,10 @@ public class ShippingConfiguration : IEntityTypeConfiguration<Shipping>
         builder.Property(s => s.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(s => s.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(s => s.DeletedDate).HasColumnName("DeletedDate");
-
+        builder.HasOne(ca => ca.District)
+            .WithMany()
+            .HasForeignKey(ca => ca.DistrictId)
+            .OnDelete(DeleteBehavior.Restrict);
         builder.HasQueryFilter(s => !s.DeletedDate.HasValue);
     }
 }

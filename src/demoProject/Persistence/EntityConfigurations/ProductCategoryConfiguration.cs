@@ -17,6 +17,11 @@ public class ProductCategoryConfiguration : IEntityTypeConfiguration<ProductCate
         builder.Property(pc => pc.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(pc => pc.DeletedDate).HasColumnName("DeletedDate");
 
+        builder.HasOne(ca => ca.Product)
+         .WithMany()
+         .HasForeignKey(ca => ca.ProductId)
+         .OnDelete(DeleteBehavior.Restrict);
+
         builder.HasQueryFilter(pc => !pc.DeletedDate.HasValue);
     }
 }
