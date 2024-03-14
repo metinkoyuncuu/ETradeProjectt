@@ -38,6 +38,7 @@ public class ContextOperationsManager : IContextOperationsService
         return seller ?? throw new AuthorizationException("You are not a Seller. Redirect to Seller login page...");
     }
 
+    public List<string>? GetOperationClaims() => _httpContextAccessor.HttpContext.User.ClaimRoles();
     
 }
 

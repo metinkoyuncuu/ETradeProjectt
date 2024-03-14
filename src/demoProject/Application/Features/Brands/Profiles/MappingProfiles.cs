@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
+using Application.Features.Brands.Queries.GetListOutsideAdmin;
 
 namespace Application.Features.Brands.Profiles;
 

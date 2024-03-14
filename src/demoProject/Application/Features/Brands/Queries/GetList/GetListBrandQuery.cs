@@ -9,6 +9,8 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Brands.Constants.BrandsOperationClaims;
+using Application.Features.OperationClaims.Constants;
+using Application.Services.ContextOperations;
 
 namespace Application.Features.Brands.Queries.GetList;
 
@@ -16,7 +18,7 @@ public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandListItemDt
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
+    public string[] Roles => new[] { Admin, Read};
 
     public bool BypassCache { get; }
     public string CacheKey => $"GetListBrands({PageRequest.PageIndex},{PageRequest.PageSize})";
@@ -27,15 +29,17 @@ public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandListItemDt
     {
         private readonly IBrandRepository _brandRepository;
         private readonly IMapper _mapper;
-
-        public GetListBrandQueryHandler(IBrandRepository brandRepository, IMapper mapper)
+        private readonly IContextOperationsService _contextOperationsService;
+        public GetListBrandQueryHandler(IBrandRepository brandRepository, IMapper mapper, IContextOperationsService contextOperationsService)
         {
             _brandRepository = brandRepository;
             _mapper = mapper;
+            _contextOperationsService = contextOperationsService;
         }
 
         public async Task<GetListResponse<GetListBrandListItemDto>> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
         {
+
             IPaginate<Brand> brands = await _brandRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 

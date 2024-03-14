@@ -10,13 +10,19 @@ using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Brands.Constants.BrandsOperationClaims;
 using Application.Features.OperationClaims.Constants;
+using Application.Services.ContextOperations;
 
 namespace Application.Features.Brands.Commands.Create;
 
 public class CreateBrandCommand : IRequest<CreatedBrandResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
+    public CreateBrandCommand(string name)
+    {
+        Name = name;
+    }
+
     public string Name { get; set; }
-    public bool IsVerified { get; set; }
+    public bool? IsVerified { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Seller };
 
@@ -29,19 +35,22 @@ public class CreateBrandCommand : IRequest<CreatedBrandResponse>, ISecuredReques
         private readonly IMapper _mapper;
         private readonly IBrandRepository _brandRepository;
         private readonly BrandBusinessRules _brandBusinessRules;
+        private readonly IContextOperationsService _contextOperationsService;
 
         public CreateBrandCommandHandler(IMapper mapper, IBrandRepository brandRepository,
-                                         BrandBusinessRules brandBusinessRules)
+                                         BrandBusinessRules brandBusinessRules, IContextOperationsService contextOperationsService)
         {
             _mapper = mapper;
             _brandRepository = brandRepository;
             _brandBusinessRules = brandBusinessRules;
+            _contextOperationsService = contextOperationsService;
         }
 
         public async Task<CreatedBrandResponse> Handle(CreateBrandCommand request, CancellationToken cancellationToken)
         {
+            List<string>? getClaims=_contextOperationsService.GetOperationClaims();
             Brand brand = _mapper.Map<Brand>(request);
-
+            brand.IsVerified=getClaims.Contains(GeneralOperationClaims.Admin)?true:false;
             await _brandRepository.AddAsync(brand);
 
             CreatedBrandResponse response = _mapper.Map<CreatedBrandResponse>(brand);

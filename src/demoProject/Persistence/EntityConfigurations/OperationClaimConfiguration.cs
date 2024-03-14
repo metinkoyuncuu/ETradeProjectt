@@ -719,9 +719,26 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "TermConditions.Add" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "TermConditions.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "TermConditions.Delete" });
-        
+
         #endregion
-        
+        #region Logs
+
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Logs.Admin" });
+
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Logs.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Logs.Write" });
+
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Logs.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Logs.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Logs.Delete" });
+
+        #endregion
         return seeds;
     }
+    
+   
+    
+   
+ 
+   
 }

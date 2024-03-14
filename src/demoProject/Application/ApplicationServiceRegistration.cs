@@ -3,12 +3,9 @@ using Application.Services.AuthService;
 using Application.Services.UsersService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching;
-using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using Core.Application.Pipelines.Validation;
 using Core.Application.Rules;
-using Core.CrossCuttingConcerns.Logging.Serilog;
-using Core.CrossCuttingConcerns.Logging.Serilog.Logger;
 using Core.ElasticSearch;
 using Core.Mailing;
 using Core.Mailing.MailKitImplementations;
@@ -62,6 +59,7 @@ using Application.Services.SubCategories;
 using Application.Services.Tags;
 using Application.Services.TermConditions;
 using Application.Services.ContextOperations;
+using Application.Services.Logs;
 
 namespace Application;
 
@@ -84,9 +82,8 @@ public static class ApplicationServiceRegistration
         services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-
         services.AddSingleton<IMailService, MailKitMailService>();
-        services.AddSingleton<LoggerServiceBase, MsSqlLogger>();
+        //services.AddSingleton<LoggerServiceBase, MsSqlLogger>();
         services.AddSingleton<IElasticSearch, ElasticSearchManager>();
         services.AddScoped<IAuthService, AuthManager>();
         services.AddScoped<IAuthenticatorService, AuthenticatorManager>();
@@ -142,6 +139,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ISubCategoriesService, SubCategoriesManager>();
         services.AddScoped<ITagsService, TagsManager>();
         services.AddScoped<ITermConditionsService, TermConditionsManager>();
+        services.AddScoped<ILogsService, LogsManager>();
         return services;
     }
 

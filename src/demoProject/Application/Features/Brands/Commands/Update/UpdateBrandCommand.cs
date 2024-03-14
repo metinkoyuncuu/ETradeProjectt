@@ -14,6 +14,13 @@ namespace Application.Features.Brands.Commands.Update;
 
 public class UpdateBrandCommand : IRequest<UpdatedBrandResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
+    public UpdateBrandCommand(int ýd, string name, bool ýsVerified)
+    {
+        Id = ýd;
+        Name = name;
+        IsVerified = ýsVerified;
+    }
+
     public int Id { get; set; }
     public string Name { get; set; }
     public bool IsVerified { get; set; }

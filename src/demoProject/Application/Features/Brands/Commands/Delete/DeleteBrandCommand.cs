@@ -1,5 +1,4 @@
 using Application.Features.Brands.Constants;
-using Application.Features.Brands.Constants;
 using Application.Features.Brands.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
@@ -9,7 +8,6 @@ using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using MediatR;
-using static Application.Features.Brands.Constants.BrandsOperationClaims;
 
 namespace Application.Features.Brands.Commands.Delete;
 
@@ -17,7 +15,7 @@ public class DeleteBrandCommand : IRequest<DeletedBrandResponse>, ISecuredReques
 {
     public int Id { get; set; }
 
-    public string[] Roles => new[] { Admin, Write, BrandsOperationClaims.Delete };
+    public string[] Roles => new[] {BrandsOperationClaims.Admin,BrandsOperationClaims.Delete};
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

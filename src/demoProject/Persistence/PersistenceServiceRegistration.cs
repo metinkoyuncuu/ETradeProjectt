@@ -73,6 +73,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
         services.AddScoped<ITagRepository, TagRepository>();
         services.AddScoped<ITermConditionRepository, TermConditionRepository>();
+        services.AddScoped<ILogRepository, LogRepository>();
         return services;
     }
 }

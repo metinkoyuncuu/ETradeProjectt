@@ -5,5 +5,6 @@ public interface IContextOperationsService
 {
     Task<Seller> GetSellerFromContext();
     Task<Customer> GetCustomerFromContext();
+    List<string>? GetOperationClaims();
 }
 

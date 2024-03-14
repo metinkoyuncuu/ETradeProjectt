@@ -3,8 +3,10 @@ using Application.Features.Brands.Commands.Delete;
 using Application.Features.Brands.Commands.Update;
 using Application.Features.Brands.Queries.GetById;
 using Application.Features.Brands.Queries.GetList;
+using Application.Features.Brands.Queries.GetListOutsideAdmin;
 using Core.Application.Requests;
 using Core.Application.Responses;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -51,4 +53,12 @@ public class BrandsController : BaseController
         GetListResponse<GetListBrandListItemDto> response = await Mediator.Send(getListBrandQuery);
         return Ok(response);
     }
+    [HttpGet("GetAll")]
+    public async Task<IActionResult> GetAll()
+    {
+        GetListBrandOutsideAdminQuery getListBrandQuery = new() {};
+        IList<Brand> response = await Mediator.Send(getListBrandQuery);
+        return Ok(response);
+    }
+    
 }
